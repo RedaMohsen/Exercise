@@ -1,0 +1,95 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.toters.exercise'
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.toters.exercise"
+        minSdkVersion minVersion
+        targetSdkVersion targetVersion
+        versionCode appVersionCode
+        versionName appVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        viewBinding true
+    }
+
+
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
+
+    def PUB_KEY = "8d02c9913625a4d9a3ee2f701abdc259"
+    def PRIV_KEY = "f3b1d70b966ce251105f37b19af9931eeb2b4345"
+
+
+    flavorDimensions "releaseType"
+    productFlavors {
+        thekode {
+            dimension "releaseType"
+            multiDexEnabled false
+            buildConfigField "String", "PUB_KEY", "\"$PUB_KEY\""
+            buildConfigField "String", "PRIV_KEY", "\"$PRIV_KEY\""
+            applicationId "com.toters.exercise"
+            versionCode 1
+            versionName "1.0.0"
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_15
+        targetCompatibility JavaVersion.VERSION_15
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.androidx.recyclerView
+    implementation deps.androidx.lifecycle
+    implementation deps.androidx.constraint
+    implementation deps.androidx.browser
+    implementation deps.androidx.paging.client
+    implementation deps.androidx.paging.rx
+
+    implementation deps.google.material
+    implementation deps.google.core
+
+    implementation deps.rx.java
+    implementation deps.rx.android
+    implementation deps.rx.relay
+
+    implementation deps.glide.client
+    implementation deps.glide.transformations
+    androidTestImplementation 'junit:junit:4.13.2'
+    annotationProcessor deps.glide.compiler
+    annotationProcessor deps.androidx.annotations
+
+    implementation deps.volley.client
+
+    implementation deps.gson.parser
+
+    implementation deps.countryPicker
+
+    implementation deps.conductor.support
+    implementation deps.conductor.runtime
+
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
+    implementation 'com.tbuonomo:dotsindicator:4.3'
+
+    testImplementation 'junit:junit:4.13.2'
+}

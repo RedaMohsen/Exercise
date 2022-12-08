@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Marvel Characters</string>
+
+
+    <!-- No Internet Dialog -->
+    <string name="internet_dialog_title">Sorry!</string>
+    <string name="internet_dialog_subtitle">It looks like something is wrong with your internet connection. Please connect to the internet and start browsing again.</string>
+    <string name="internet_dialog_action_check">Check the Internet</string>
+    <string name="internet_dialog_action_retry">Try again</string>
+
+
+    <!--networks errors-->
+    <string name="apis_error">Failed to contact our servers!!</string>
+    <string name="error_no_pdf_app_installed">error_no_pdf_app_installed</string>
+    <string name="error_no_app_installed">error_no_app_installed</string>
+    <string name="error_timeout">Connection timed out</string>
+    <string name="error_auth_failed">Authentication failed</string>
+    <string name="error_server">Server error occurred</string>
+    <string name="error_parse">Failed to parse server response</string>
+    <string name="error_session">Session expired</string>
+    <string name="error_network">Network error</string>
+    <string name="error_unauthorized_access">You are not authorized to view this page, please login again</string>
+</resources>

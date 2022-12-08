@@ -1,0 +1,111 @@
+ext {
+
+    minVersion = 24
+    targetVersion = 31
+    compileVersion = 31
+    appVersionCode = 1
+    appVersionName = "1.0.0"
+
+    versions = [
+            test_runner: "1.1.0",
+            glide      : '4.14.2',
+            conductor  : [
+                    conductor: '3.1.7',
+                    support  : "3.0.0-rc2",
+                    transition: "3.1.2"
+            ],
+            dynamicanimation_version: "1.0.0",
+            countryPicker: "2.0.0",
+            "slider": "2.0.0",
+            "charts": "3.1.0",
+            "material": "1.5.0",
+            core    : '1.10.3',
+            playServices: [
+                    fitness: "20.0.0",
+                    auth: '19.2.0',
+                    maps: '18.0.2',
+                    places: "2.4.0",
+                    location: '19.0.1',
+            ],
+            rx: [
+                    relay: "2.1.1",
+                    java : '2.2.21'
+            ],
+            androidx: [
+                    appCompat   : '1.5.0',
+                    recyclerView: '1.2.1',
+                    annotations : '1.4.0',
+                    lifecycle   : "2.5.0",
+                    preferences : '1.2.0',
+                    constraint  : '2.1.4',
+                    coordinator : '1.2.0',
+                    dynamic     : "1.0.0",
+                    media       : '1.6.0',
+                    browser     : '1.4.0',
+                    multidex    : '2.0.1',
+                    paging      : '3.1.1'
+            ],
+    ]
+
+    deps = [
+            test       : [
+                    junit: "junit:junit:4.12"
+            ],
+            countryPicker: "com.github.mukeshsolanki:country-picker-android:$versions.countryPicker",
+            slider       : "com.ss.bannerslider:bannerslider:$versions.slider",
+            charts       : "com.github.PhilJay:MPAndroidChart:v$versions.charts",
+            google       : [
+                    material    : "com.google.android.material:material:$versions.material",
+                    core        : "com.google.android.play:core:$versions.core",
+                    firebase    : [
+                            analytics   : "com.google.firebase:firebase-analytics",
+                            messaging   : "com.google.firebase:firebase-messaging",
+                            crashlytics : "com.google.firebase:firebase-crashlytics"
+                    ],
+                    playServices: [
+                            fitness   : "com.google.android.gms:play-services-fitness:20.0.0",
+                            auth      : "com.google.android.gms:play-services-auth:19.0.0",
+                            maps      : "com.google.android.gms:play-services-maps:$versions.playServices.maps",
+                            location  : "com.google.android.gms:play-services-location:$versions.playServices.location",
+                            places    : "com.google.android.libraries.places:places:$versions.playServices.places"
+                    ]
+            ],
+            androidx     : [
+                    appCompat   : "androidx.appcompat:appcompat:1.2.0",
+                    recyclerView: "androidx.recyclerview:recyclerview:1.2.0-beta01",
+                    annotations : "androidx.annotation:annotation:1.4.0",
+                    lifecycle   : "androidx.lifecycle:lifecycle-extensions:2.2.0",
+                    preferences : "androidx.preference:preference:1.1.1",
+                    constraint  : "androidx.constraintlayout:constraintlayout:2.0.4",
+                    dynamic: "androidx.dynamicanimation:dynamicanimation:$versions.dynamicanimation_version",
+                    browser    : "androidx.browser:browser:$versions.androidx.browser",
+                    media: "androidx.media:media:1.4.1",
+                    paging     : [
+                            client: "androidx.paging:paging-runtime-ktx:$versions.androidx.paging",
+                            rx    : "androidx.paging:paging-rxjava3:$versions.androidx.paging"
+                    ],
+            ],
+            rx         : [
+                    relay  : "com.jakewharton.rxrelay2:rxrelay:$versions.rx.relay",
+                    java   : "io.reactivex.rxjava2:rxjava:$versions.rx.java",
+                    android: "io.reactivex.rxjava2:rxandroid:$versions.rx.relay",
+            ],
+            volley   : [
+                    client            : "com.android.volley:volley:1.1.1",
+            ],
+            glide          : [
+                    client           : "com.github.bumptech.glide:glide:$versions.glide",
+                    compiler         : "com.github.bumptech.glide:compiler:$versions.glide",
+                    okHttpIntegration: "com.github.bumptech.glide:okhttp3-integration:$versions.glide@aar",
+                    transformations  : "jp.wasabeef:glide-transformations:4.3.0"
+            ],
+            conductor  : [
+                    runtime    : "com.bluelinelabs:conductor:$versions.conductor.conductor",
+                    support    : "com.bluelinelabs:conductor-support:$versions.conductor.support",
+                    transition : "com.bluelinelabs:conductor-androidx-transition:$versions.conductor.transition"
+            ],
+            gson       : [
+                    parser     : "com.google.code.gson:gson:2.8.6"
+            ]
+    ]
+}
