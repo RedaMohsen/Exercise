@@ -31,7 +31,9 @@
     <color name="color_white_75">#BFFFFFFF</color>
 
     <color name="color_black_0">#00000000</color>
+    <color name="color_black_10">#1A000000</color>
     <color name="color_black_20">#33000000</color>
+    <color name="color_black_30">#4D000000</color>
     <color name="color_black_40">#66000000</color>
     <color name="color_black_50">#80000000</color>
     <color name="color_black_60">#99000000</color>

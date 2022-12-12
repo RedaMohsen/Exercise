@@ -1,5 +1,9 @@
 package com.toters.exercise.features.main.home;
 
+import static com.toters.exercise.constants.AppConstants.ANIMATE_FADE_IN;
+import static com.toters.exercise.constants.AppConstants.ANIMATE_FADE_OUT;
+import static com.toters.exercise.constants.BundleConstants.BUNDLE_CHARACTER_MODEL;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,15 +18,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.toters.exercise.R;
 import com.toters.exercise.base.BaseRestoreController;
 import com.toters.exercise.databinding.ControllerHomeBinding;
+import com.toters.exercise.features.main.details.DetailsController;
 import com.toters.exercise.features.main.home.adapter.MarcelCharacterAdapter;
+import com.toters.exercise.helper.ResourceHelper;
 import com.toters.exercise.provider.AppProvider;
+import com.toters.exercise.utils.AnimationUtils;
 
 public class HomeController extends BaseRestoreController<HomeViewModel> {
     private ControllerHomeBinding binding;
-
+    private ResourceHelper resourceHelper;
 
     boolean isLoading = false;
     private MarcelCharacterAdapter adapter;
+    RecyclerView.OnScrollListener endOnScrollListener;
 
     @NonNull
     @Override
@@ -36,41 +44,20 @@ public class HomeController extends BaseRestoreController<HomeViewModel> {
 
     @Override
     protected HomeViewModel onCreateViewModel(AppProvider appProvider) {
+        resourceHelper = appProvider.getResourceHelper();
         return new HomeViewModel(appProvider.getUserClient());
     }
 
     @Override
     protected void onBindView(Activity activity, AppProvider appProvider, HomeViewModel viewModel, Bundle savedViewState) {
 
-        adapter = new MarcelCharacterAdapter(item -> {
-
-        });
-        binding.recyclerView.setAdapter(adapter);
-
-
-        RecyclerView.OnScrollListener endOnScrollListener = new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (isLastItemDisplaying(recyclerView)) {
-                    if (!isLoading) {
-                        Log.e("Reached end: ", "Load more");
-                        isLoading = true;
-                        viewModel.getCharacters(adapter.getItemCount());
-                    }
-                }
-            }
-        };
-
-        binding.recyclerView.addOnScrollListener(endOnScrollListener);
+        setupUI(activity);
 
         disposables.add(viewModel.getCharactersRelay().subscribe(charactersResponse -> {
+            if (binding.shimmerGroup.getRoot().getVisibility() == View.VISIBLE) {
+                AnimationUtils.animateViewVisibility(binding.shimmerGroup.shimmerCards, ANIMATE_FADE_OUT, 300);
+                AnimationUtils.animateViewVisibility(binding.recyclerView, ANIMATE_FADE_IN, 100);
+            }
 
             adapter.setItems(charactersResponse.getResults());
             isLoading = false;
@@ -114,5 +101,40 @@ public class HomeController extends BaseRestoreController<HomeViewModel> {
     @Override
     public void onToolbarBind(View view) {
 
+    }
+
+    void setupUI(Activity activity) {
+        adapter = new MarcelCharacterAdapter(resourceHelper, item -> {
+            setRetainViewMode(RetainViewMode.RETAIN_DETACH);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(BUNDLE_CHARACTER_MODEL, item);
+            openPage(new DetailsController(bundle));
+        });
+        binding.recyclerView.setAdapter(adapter);
+
+
+        endOnScrollListener = new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (isLastItemDisplaying(recyclerView)) {
+                    if (!isLoading) {
+                        Log.e("Reached end: ", "Load more");
+                        isLoading = true;
+                        viewModel.getCharacters(adapter.getItemCount());
+                    }
+                }
+            }
+        };
+
+        binding.recyclerView.addOnScrollListener(endOnScrollListener);
+
+        binding.shimmerGroup.getRoot().startShimmer();
     }
 }

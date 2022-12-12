@@ -20,4 +20,17 @@
     <string name="error_session">Session expired</string>
     <string name="error_network">Network error</string>
     <string name="error_unauthorized_access">You are not authorized to view this page, please login again</string>
+
+    <string name="hero_has_no_desc">{This hero has no description}</string>
+
+    <string name="hero_id">Hero Id</string>
+
+    <string name="comics">Comics</string>
+    <string name="events">Events</string>
+    <string name="series">Series</string>
+    <string name="stories">Stories</string>
+
+
+    <string name="description_not_found">{Description not found}</string>
+    <string name="no_items_found">No Items Found</string>
 </resources>

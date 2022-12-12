@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/txt_view_header"
+        style="@style/TitleTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:text="@string/comics"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_size_16" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <include
+        android:id="@+id/shimmer_group"
+        layout="@layout/shimmer_layout_details" />
+
+    <TextView
+        android:id="@+id/txt_view_no_item"
+        style="@style/TitleTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:text="@string/no_items_found"
+        android:visibility="gone"
+        android:textColor="@color/error_color"
+        android:textSize="@dimen/txt_size_16" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="txt_view_header,recycler_view,shimmer_group,txt_view_no_item"
+        app:flow_horizontalAlign="start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

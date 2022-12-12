@@ -1,6 +1,7 @@
 package com.toters.exercise.features.main.home.adapter;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.toters.exercise.R;
 import com.toters.exercise.databinding.RowItemCharacterBinding;
+import com.toters.exercise.helper.ResourceHelper;
 import com.toters.exercise.network.model.responseBody.CharacterModel;
 import com.toters.exercise.utils.ImageUtils;
 
@@ -20,8 +23,10 @@ public class MarcelCharacterAdapter extends RecyclerView.Adapter<MarcelCharacter
 
     private final List<CharacterModel> items = new ArrayList<>();
     private final OnClickListener listener;
+    private ResourceHelper resourceHelper;
 
-    public MarcelCharacterAdapter(OnClickListener listener) {
+    public MarcelCharacterAdapter(ResourceHelper resourceHelper, OnClickListener listener) {
+        this.resourceHelper = resourceHelper;
         this.listener = listener;
     }
 
@@ -63,7 +68,10 @@ public class MarcelCharacterAdapter extends RecyclerView.Adapter<MarcelCharacter
 
         void bind(CharacterModel item) {
             ImageUtils.loadImage(String.format("%s.%s", item.getThumbNail().getPath(), item.getThumbNail().getExtension()), binding.imgView);
+            binding.txtViewName.setText(item.getName());
+            binding.txtViewDesc.setText(TextUtils.isEmpty(item.getDescription()) ? resourceHelper.getString(R.string.hero_has_no_desc) : item.getDescription());
 
+            binding.getRoot().setOnClickListener(view -> listener.onClick(item));
         }
     }
 }

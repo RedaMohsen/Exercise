@@ -299,4 +299,11 @@
     <style name="ButtonStyleMedium" parent="ButtonStyle">
         <item name="android:fontFamily">@font/poppins_bold</item>
     </style>
+
+    <style name="ShapeableImageStyle" parent="">
+        <item name="cornerSizeBottomLeft">8dp</item>
+        <item name="cornerSizeBottomRight">8dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeTopRight">8dp</item>
+    </style>
 </resources>
